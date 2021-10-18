@@ -51,7 +51,7 @@ public abstract class Media {
         return anioDebut;
     }
 
-    public void añadirCopia (Integer cant){
+    public void agregarCopia (Integer cant){
 
         this.cantEjemplares += cant;
     }

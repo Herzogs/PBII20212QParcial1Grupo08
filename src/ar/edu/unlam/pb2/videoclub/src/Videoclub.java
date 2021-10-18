@@ -106,20 +106,20 @@ public class Videoclub {
         for (int i = 0; i < this.catalogo.size() && !est; i++) {
             if(peli.getCodPel().equals(this.catalogo.get(i).getCodPel())){
                 est = true;
-                this.catalogo.get(i).añadirCopia(cant);
+                this.catalogo.get(i).agregarCopia(cant);
             }
         }
         return est;
     }
 
-   public Boolean alquilar(Media media, Cliente per) {
+   public Boolean alquilar(Media media, Cliente per,String fech,Integer diasAlquiler) {
         Boolean est = false;
         Integer ind = this.buscarClienteXDNI(per.getDni());
         if (ind != -1 && this.listaCliente.get(ind).getNroEjemplaresAlquilados() < this.MAX_CANT_ALQUILERES_PERMITIDOS_POR_CLIENTE && this.listaCliente.get(ind).getEst().equals(DESBLOQUEAR_USUARIO)){
             Integer indMedia = this.buscarMediaXCod(media.getCodPel());
             if ( indMedia != -1) {
                 if(this.catalogo.get(indMedia).getCantEjemplares() > 0){
-                    this.listaAlquileres.add(new Alquiler(media,per.getDni(),"27/10/2020",7));
+                    this.listaAlquileres.add(new Alquiler(media,per.getDni(),fech,diasAlquiler));
                     this.listaCliente.get(ind).incrementarEjemplarAlquilado();
                     this.catalogo.get(indMedia).decremtentarEjemplar();
                     est = true;
@@ -139,7 +139,7 @@ public class Videoclub {
             Alquiler aux = this.listaAlquileres.remove(indAlq-1);
             this.listaCliente.get(this.buscarClienteXDNI(cli.getDni())).decrementarEjemplarAlquilado();
             aux.setEstadoAlquiler(false);
-            this.catalogo.get(this.buscarMediaXCod(media.getCodPel())).añadirCopia(1);
+            this.catalogo.get(this.buscarMediaXCod(media.getCodPel())).agregarCopia(1);
             this.listaDevoluciones.add(aux);
             est = true;
             if (this.listaCliente.get(indCli).getNroEjemplaresAlquilados() < this.MAX_CANT_ALQUILERES_PERMITIDOS_POR_CLIENTE) {
@@ -149,4 +149,23 @@ public class Videoclub {
         return est;
     }
 
+    public ArrayList<Cliente> getListaCliente() {
+        return listaCliente;
+    }
+
+    public ArrayList<Alquiler> getListaAlquileres() {
+        return listaAlquileres;
+    }
+
+    public ArrayList<Alquiler> getListaDevoluciones() {
+        return listaDevoluciones;
+    }
+
+    public ArrayList<Media> getCatalogo() {
+        return catalogo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
