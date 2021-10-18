@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Videoclub {
 
-    private ArrayList<Cliente> listaCliente;
-    private ArrayList<Alquiler> listaAlquileres;
-    private ArrayList<Alquiler> listaDevoluciones;
-    private ArrayList<Media> catalogo;
+    private ArrayList<Cliente> listaCliente;  // Contiene todos los clientes del VideoClub
+    private ArrayList<Alquiler> listaAlquileres; // Acá se guardan las Series o Peliculas que se hayan alquilado
+    private ArrayList<Alquiler> listaDevoluciones; // Acá se guardan las Series o Peliculas que se hayan devolvido
+    private ArrayList<Media> catalogo; // Acá se guardan todas las Series o Peliculas que se Ingresen
     private final String nombre;
     private final Integer MAX_CANT_ALQUILERES_PERMITIDOS_POR_CLIENTE = 2;
     private static final Boolean DESBLOQUEAR_USUARIO = false;
@@ -121,7 +121,7 @@ public class Videoclub {
                 if(this.catalogo.get(indMedia).getCantEjemplares() > 0){
                     this.listaAlquileres.add(new Alquiler(media,per.getDni(),fech,diasAlquiler));
                     this.listaCliente.get(ind).incrementarEjemplarAlquilado();
-                    this.catalogo.get(indMedia).decremtentarEjemplar();
+                    this.catalogo.get(indMedia).decrementarEjemplar();
                     est = true;
                     if (this.listaCliente.get(ind).getNroEjemplaresAlquilados() == this.MAX_CANT_ALQUILERES_PERMITIDOS_POR_CLIENTE) {
                         this.listaCliente.get(ind).bloquearCliente();

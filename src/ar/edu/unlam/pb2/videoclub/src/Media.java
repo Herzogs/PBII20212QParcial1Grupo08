@@ -4,12 +4,12 @@ public abstract class Media {
 
     private String nombre; // nombre de la pelicula o serie xej: Casa de Papel - Temp 1
     private String codPel; // codigo de pelicula o serie
-    private String genero; 
-    private String actores; 
+    private String genero;  // genero de la pelicula o seria
+    private String actores;  //actores de la pelicula o Serie
     private String direc; //director
     private Integer dur; //duracion
-    private Integer anioDebut;
-    private Integer cantEjemplares;
+    private Integer anioDebut; //anio en que se debuto la Serie
+    private Integer cantEjemplares; // cantidad de ejemplares disponibles para alquiler
 
     public Media(String nombre, String codPel, String genero, String actores, String direc, Integer dur, Integer anioDebut) {
         this.nombre = nombre;
@@ -60,7 +60,12 @@ public abstract class Media {
         return cantEjemplares;
     }
 
-    public void decremtentarEjemplar (){
-        this.cantEjemplares--;
+    public Boolean decrementarEjemplar () {
+        Boolean est = false;
+        if (this.cantEjemplares > 0) {
+            this.cantEjemplares--;
+            est = true;
+        }
+        return est;
     }
 }
