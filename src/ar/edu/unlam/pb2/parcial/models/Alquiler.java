@@ -1,4 +1,4 @@
-package ar.edu.unlam.pb2.parcial.models;
+package ar.edu.unlam.pb2.videoclub.src;
 
 public class Alquiler {
     private Media peliAlquilar;
